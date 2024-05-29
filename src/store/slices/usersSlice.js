@@ -4,9 +4,10 @@ const initialState = {
     users: [],
     error: null,
     status: 'idle' // 'idle'|'loading'|'succeeded'|'failed'
+
 };
 
-const USERS_URL = "/users?limit=50"; 
+const USERS_URL = "/users?limit=50";
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     try {
@@ -16,15 +17,15 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
         }
         return await response.json();
     } catch (error) {
-        console.log(error);
-        throw error; 
+        throw error;
     }
 });
 
 const usersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchUsers.pending, (state) => {
@@ -35,7 +36,6 @@ const usersSlice = createSlice({
                 state.error = action.error.message;
             })
             .addCase(fetchUsers.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.status = "succeeded";
                 state.error = null;
                 state.users = action.payload.users;
@@ -43,6 +43,7 @@ const usersSlice = createSlice({
     },
 });
 
+export const { getUsers } = usersSlice.actions
 export const selectedAllUsers = (state) => state.user.users;
 export const getUsersStatus = (state) => state.user.status;
 export const getUsersError = (state) => state.user.error;

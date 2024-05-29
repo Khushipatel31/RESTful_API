@@ -1,4 +1,4 @@
-import Users from "./components/actions/users/Users";
+import Users from "./components/users/Users";
 const App = () => {
   return (
     <>
