@@ -10,19 +10,13 @@ const initialState = {
   status: "idle", // 'idle'|'loading'|'succeeded'|'failed'
 };
 
-const USERS_URL = "/users?limit=220";
+const USERS_URL = "http://dummyjson.com/users?limit=220";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-  try {
     const response = await fetch(USERS_URL);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
     return await response.json();
-  } catch (error) {
-    throw error;
   }
-});
+);
 
 const usersSlice = createSlice({
   name: "users",
@@ -68,7 +62,6 @@ const usersSlice = createSlice({
 export const { getUsers, changeCurrPage, filteringUsers } = usersSlice.actions;
 export const selectedAllUsers = (state) => state.user.users;
 export const filteredUsers = (state) => state.user.filtered;
-
 export const getUsersStatus = (state) => state.user.status;
 export const getUsersError = (state) => state.user.error;
 export const getCurrPage = (state) => state.user.currPage;
