@@ -8,8 +8,6 @@ import {
   getCurrPage,
   getPerPage,
   getKey,
-  filteredUsers,
-  updateUsers
 } from "../../store/slices/usersSlice";
 import Search from "../search/Search";
 import User from "./User";
@@ -28,11 +26,6 @@ const Users = () => {
       dispatch(fetchUsers());
     }
   }, [dispatch, usersStatus]);
-
-
-  // useEffect(()=>{
-  //   dispatch(updateUsers(key))
-  // },[key,users])
 
   const paginatedUsers = useMemo(() => {
     let newFilteredUsers = users;
@@ -55,13 +48,19 @@ const Users = () => {
   return (
     <div className="bg-[#0f172a] mt-0 mb-0 h-[100%]">
       <Search />
-      <div className="gap-5 m-4 p-11 grid grid-flow-row grid-cols-4 ">
-        {paginatedUsers.map((user) => (
-          <span key={user.id}>
-            <User user={user} />
-          </span>
-        ))}
-      </div>
+
+      {paginatedUsers && paginatedUsers.length == 0 ? (
+        <p className="flex w-full text-center text-white p-8 text-xl justify-center">No user exist with name {key}</p>
+      ) : (
+        <div className="gap-5 m-4 p-11 grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {paginatedUsers &&
+            paginatedUsers.map((user) => (
+              <span key={user.id}>
+                <User user={user} />
+              </span>
+            ))}
+        </div>
+      )}
       <Pagination />
     </div>
   );
