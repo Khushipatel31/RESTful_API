@@ -10,7 +10,7 @@ const initialState = {
   status: "idle", // 'idle'|'loading'|'succeeded'|'failed'
 };
 
-const USERS_URL = "http://dummyjson.com/users?limit=220";
+const USERS_URL = "https://dummyjson.com/users?limit=220";
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
     const response = await fetch(USERS_URL);
