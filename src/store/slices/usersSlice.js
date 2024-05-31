@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const initialState = {
     users: [],
@@ -37,7 +38,15 @@ const usersSlice = createSlice({
                 state.currPage = action.payload.curr
         },
         updateUsers(state, action) {
-            state.filtered = action.payload.filteredUsers
+           
+            if( action.payload.key &&  action.payload.key!=''){
+                const key = action.payload.key.toLowerCase();
+                state.users = state.users.filter(user => user.firstName.toLowerCase().includes(key));
+                console.log(state.users.length)
+                console.log("h")
+            }else{
+                state.users=state.filtered
+            }
         },
     },
     extraReducers: (builder) => {
@@ -53,6 +62,7 @@ const usersSlice = createSlice({
                 state.status = "succeeded";
                 state.error = null;
                 state.users = action.payload.users;
+                state.filtered=action.payload.users;
             });
     },
 });

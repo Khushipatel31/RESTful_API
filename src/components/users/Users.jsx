@@ -8,6 +8,8 @@ import {
   getCurrPage,
   getPerPage,
   getKey,
+  filteredUsers,
+  updateUsers
 } from "../../store/slices/usersSlice";
 import Search from "../search/Search";
 import User from "./User";
@@ -26,6 +28,11 @@ const Users = () => {
       dispatch(fetchUsers());
     }
   }, [dispatch, usersStatus]);
+
+
+  // useEffect(()=>{
+  //   dispatch(updateUsers(key))
+  // },[key,users])
 
   const paginatedUsers = useMemo(() => {
     let newFilteredUsers = users;

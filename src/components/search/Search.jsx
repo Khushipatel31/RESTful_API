@@ -1,14 +1,19 @@
 import React from "react";
 import {
  changeKey,
- getKey
+ getKey,
+ selectedAllUsers,
+ updateUsers
 } from "../../store/slices/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 const Search = () => {
   const dispatch=useDispatch();
   const searchKey = useSelector(getKey);
+  const users = useSelector(selectedAllUsers);
+
   const filterHandler=(e)=>{
       dispatch(changeKey({key:e.target.value,curr:0}))
+      dispatch(updateUsers({key:e.target.value}))
   }
   const clearHandler=()=>{
     dispatch(changeKey({key:'',curr:0}))

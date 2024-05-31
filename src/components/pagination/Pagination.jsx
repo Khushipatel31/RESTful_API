@@ -62,7 +62,7 @@ const Pagination = () => {
 
         {users && (
           <p className="text-white">
-            {currPage + 1}of{parseInt(users.length / perPage)}
+            {currPage + 1}of{(parseInt(users.length / perPage)==0)?1:parseInt(users.length / perPage)}
           </p>
         )}
         <button
