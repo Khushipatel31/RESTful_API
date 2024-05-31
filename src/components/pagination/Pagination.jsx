@@ -6,9 +6,7 @@ import {
   getPerPage,
   getUsersStatus,
   selectedAllUsers,
-  filteredUsers,
 } from "../../store/slices/usersSlice";
-import { toast } from "react-toastify";
 const Pagination = () => {
   const dispatch = useDispatch();
   const users = useSelector(selectedAllUsers);
