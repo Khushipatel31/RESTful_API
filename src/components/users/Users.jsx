@@ -48,11 +48,10 @@ const Users = () => {
   return (
     <div className="bg-[#0f172a] mt-0 mb-0 h-[100%]">
       <Search />
-
       {paginatedUsers && paginatedUsers.length == 0 ? (
         <p className="flex w-full text-center text-white p-8 text-xl justify-center">No user exist with name {key}</p>
       ) : (
-        <div className="gap-5 m-4 p-11 grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+        <div className="gap-5 m-4 p-11 grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 ">
           {paginatedUsers &&
             paginatedUsers.map((user) => (
               <span key={user.id}>

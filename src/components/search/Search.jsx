@@ -24,12 +24,6 @@ const Search = () => {
           value={searchKey}
           onChange={filterHandler}
         ></input>
-        {/* <button
-          className="bg-[#34aae0] p-3 text-xl font-bold w-1/12 rounded-lg m-3 hover:bg-[#1e8fc3] hover:shadow-md hover:shadow-black hover:text-white"
-          onSubmit={filterHandler}
-        >
-          Search
-        </button> */}
         <button
           className="bg-[#34aae0]  justify-end self-end p-3 text-red-600  text-xl font-bold w-1/12 rounded-lg m-3 hover:bg-[#1e8fc3] hover:shadow-md hover:shadow-black hover:text-white"
           onClick={clearHandler}
