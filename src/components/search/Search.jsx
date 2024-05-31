@@ -8,21 +8,20 @@ const Search = () => {
   const dispatch=useDispatch();
   const searchKey = useSelector(getKey);
   const filterHandler=(e)=>{
-      dispatch(changeKey({key:e.target.value}))
+      dispatch(changeKey({key:e.target.value,curr:0}))
   }
   const clearHandler=()=>{
-    dispatch(changeKey({key:''}))
+    dispatch(changeKey({key:'',curr:0}))
   }
   
   return (
     <>
-      <div className="flex justify-center m-0 p-4 container w-full">
+      <div className="flex justify-center m-0 p-4 pt-5 container w-full">
         <input
           type="text"
           className="bg-[#34aae0] p-3 rounded-lg w-4/12 border border-[#34aae0] text-black text-lg active:bg-[#34aae0]  active:border-[#34aae0] hover:border-[#34aae0] hover:shadow-md hover:bg-[#34aae0]  m-3  "
           placeholder="Search..."
           value={searchKey}
-
           onChange={filterHandler}
         ></input>
         <button

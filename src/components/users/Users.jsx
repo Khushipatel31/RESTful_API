@@ -21,7 +21,6 @@ const Users = () => {
   const error = useSelector(getUsersError);
   const perPage = useSelector(getPerPage);
   const currPage = useSelector(getCurrPage);
-
   useEffect(() => {
     if (usersStatus === "idle") {
       dispatch(fetchUsers());
@@ -29,29 +28,27 @@ const Users = () => {
   }, [dispatch, usersStatus]);
 
   const paginatedUsers = useMemo(() => {
+    let newFilteredUsers = users;
+    if (users && key && key !== "") {
+      newFilteredUsers = users.filter((user) =>
+        user?.firstName?.toLowerCase().includes(key.toLowerCase())
+      );
+    }
     const start = currPage * perPage;
     const end = start + perPage;
-    let filteredUsers = users;
-    if (users && users.length > 0 && key && key !== "") {
-      filteredUsers = users.filter((user) => {
-        return user?.firstName?.toLowerCase().includes(key.toLowerCase());
-      });
-    }
-    return filteredUsers.slice(start, end);
+    return newFilteredUsers.slice(start, end);
   }, [users, perPage, currPage, key]);
-
   if (usersStatus === "loading") {
     return <div>Loading...</div>;
   }
-
   if (usersStatus === "failed") {
     return <div>Error: {error}</div>;
   }
 
   return (
-    <div className="bg-[#0f172a] mt-0 mb-0 h-[100rem]">
+    <div className="bg-[#0f172a] mt-0 mb-0 h-[100%]">
       <Search />
-      <div className="gap-5 m-4 grid grid-flow-row grid-cols-4">
+      <div className="gap-5 m-4 p-11 grid grid-flow-row grid-cols-4 ">
         {paginatedUsers.map((user) => (
           <span key={user.id}>
             <User user={user} />
